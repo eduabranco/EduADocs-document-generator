@@ -1,5 +1,6 @@
 from llm_handlers.api_handler import get_llm_response
 from docx import Document
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 import io
 
 def generate_exercises(params):
@@ -34,13 +35,27 @@ def _build_exercise_prompt(params):
     Difficulty: {params['difficulty']}
     Question types: {', '.join(params['question_types'])}
     
-    Please structure the exercises as follows:
+    Please structure the exercises using clean Markdown formatting as follows:
     1. Start with a brief introduction to the topic
-    2. Organize questions by difficulty (if mixed difficulty is selected)
-    3. Include clear instructions for each section
-    4. For multiple choice questions, provide 4 options (A, B, C, D)
-    5. For problem-solving questions, show step-by-step solutions
-    6. End with an answer key
+    2. Use clear heading structure:
+       - # for the main title
+       - ## for major sections
+       - ### for subsections only
+    3. Use numbered lists (1. 2. 3.) for questions
+    4. Organize questions by difficulty (if mixed difficulty is selected)
+    5. Include clear instructions for each section
+    6. For multiple choice questions, provide 4 options (A, B, C, D)
+    7. For problem-solving questions, show step-by-step solutions
+    8. End with an answer key
+    
+    FORMATTING RULES:
+    - Use # Exercise List for the main title
+    - Use ## Section Name for major sections (e.g., ## Multiple Choice Questions)
+    - Use ### Subsection Name only when needed
+    - DO NOT use --- horizontal rules
+    - DO NOT mix heading levels (like ### ## or #### ##)
+    - Use 1. 2. 3. for numbered questions
+    - Keep formatting simple and clean
     
     Make sure the content is age-appropriate and educationally valuable.
     """
@@ -54,17 +69,14 @@ def _create_exercise_docx(content, params):
     
     # Title
     title = doc.add_heading(f"{params['subject']} - Exercise List", 0)
-    title.alignment = 1  # Center alignment
+    title.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER  # Center alignment
     
     # Subtitle
     doc.add_heading(f"Topic: {params['topic']}", level=2)
     doc.add_heading(f"Grade Level: {params['grade_level']}", level=3)
     
-    # Add content
-    paragraphs = content.split('\n\n')
-    for paragraph in paragraphs:
-        if paragraph.strip():
-            doc.add_paragraph(paragraph.strip())
+    # Add content with proper markdown formatting
+    _add_formatted_content_to_docx(doc, content)
     
     # Save to bytes
     doc_io = io.BytesIO()
@@ -72,3 +84,56 @@ def _create_exercise_docx(content, params):
     doc_io.seek(0)
     
     return doc_io.getvalue()
+
+def _add_formatted_content_to_docx(doc, content):
+    """Add formatted content to Word document, parsing Markdown formatting"""
+    lines = content.split('\n')
+    
+    for i, line in enumerate(lines):
+        line = line.strip()
+        if not line:
+            doc.add_paragraph("")
+            continue
+        
+        # Skip horizontal rules
+        if line == '---' or line.startswith('---'):
+            continue
+        
+        # Clean up malformed headings (remove extra # symbols)
+        if line.startswith('#'):
+            # Count the number of # at the start
+            hash_count = 0
+            for char in line:
+                if char == '#':
+                    hash_count += 1
+                else:
+                    break
+            
+            # Extract the text after all the #
+            remaining_text = line[hash_count:].strip()
+            
+            # Remove any additional # symbols from the beginning of the text
+            while remaining_text.startswith('#'):
+                remaining_text = remaining_text[1:].strip()
+            
+            # Limit heading levels to 4
+            actual_level = min(hash_count, 4)
+            if actual_level > 0 and remaining_text:
+                doc.add_heading(remaining_text, level=actual_level)
+                continue
+            
+        # Check if it's a bullet point
+        if line.startswith('- ') or line.startswith('* ') or line.startswith('• '):
+            doc.add_paragraph(line[2:], style='List Bullet')
+        # Check if it's a numbered list
+        elif len(line) > 3 and line[0].isdigit() and line[1:3] in ['. ', ') ']:
+            doc.add_paragraph(line[3:], style='List Number')
+        else:
+            # Handle bold formatting and other text
+            formatted_text = line
+            
+            # Remove markdown bold formatting (**text**)
+            import re
+            formatted_text = re.sub(r'\*\*(.*?)\*\*', r'\1', formatted_text)
+            
+            doc.add_paragraph(formatted_text)

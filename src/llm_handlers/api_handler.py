@@ -1,6 +1,35 @@
 import requests
 import json
 import time
+import re
+
+def _clean_thinking_tags(text):
+    """Remove <think> and </think> tags and content between them from text"""
+    if not text:
+        return text
+    
+    # Remove thinking tags and their content (case-insensitive, multiline)
+    pattern = r'<think>.*?</think>'
+    cleaned_text = re.sub(pattern, '', text, flags=re.IGNORECASE | re.DOTALL)
+    
+    # Also handle self-closing think tags
+    pattern_self_closing = r'<think\s*/>'
+    cleaned_text = re.sub(pattern_self_closing, '', cleaned_text, flags=re.IGNORECASE)
+    
+    # Clean up extra whitespace that might be left behind
+    # Replace multiple consecutive newlines with just two newlines
+    cleaned_text = re.sub(r'\n\s*\n\s*\n+', '\n\n', cleaned_text)
+    
+    # Remove leading/trailing whitespace from each line while preserving structure
+    lines = cleaned_text.split('\n')
+    cleaned_lines = []
+    for line in lines:
+        cleaned_lines.append(line.rstrip())
+    
+    cleaned_text = '\n'.join(cleaned_lines)
+    cleaned_text = cleaned_text.strip()
+    
+    return cleaned_text
 
 def get_llm_response(prompt, llm_config):
     """Get response from configured LLM"""
@@ -98,7 +127,12 @@ def _get_ollama_response(prompt, config):
             raise Exception(f"Ollama API error: {response.status_code} - {response.text}")
         
         result = response.json()
-        return result.get("response", "No response generated")
+        raw_response = result.get("response", "No response generated")
+        
+        # Clean thinking tags from Ollama response
+        cleaned_response = _clean_thinking_tags(raw_response)
+        
+        return cleaned_response
         
     except requests.exceptions.Timeout:
         raise Exception("Ollama generation timeout. The model might be too slow or the prompt too complex. Try a simpler prompt or a faster model.")

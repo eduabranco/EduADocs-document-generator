@@ -82,41 +82,44 @@ def _create_summary_docx(content, params):
 
 def _add_bullet_content(doc, content):
     """Add content in bullet point format"""
-    paragraphs = content.split('\n\n')
-    for paragraph in paragraphs:
-        if paragraph.strip():
-            lines = paragraph.split('\n')
-            for line in lines:
-                if line.strip():
-                    doc.add_paragraph(line.strip(), style='List Bullet')
+    _add_formatted_content_to_docx(doc, content)
 
 def _add_outline_content(doc, content):
     """Add content in outline format"""
-    lines = content.split('\n')
-    for line in lines:
-        if line.strip():
-            if line.startswith('#'):
-                level = line.count('#')
-                doc.add_heading(line.replace('#', '').strip(), level=min(level, 3))
-            else:
-                doc.add_paragraph(line.strip())
+    _add_formatted_content_to_docx(doc, content)
 
 def _add_qa_content(doc, content):
     """Add content in Q&A format"""
-    sections = content.split('\n\n')
-    for section in sections:
-        if '?' in section:
-            lines = section.split('\n')
-            question = lines[0] if lines else section
-            answer = '\n'.join(lines[1:]) if len(lines) > 1 else ""
-            
-            doc.add_paragraph(question, style='Heading 3')
-            if answer:
-                doc.add_paragraph(answer.strip())
+    _add_formatted_content_to_docx(doc, content)
 
 def _add_paragraph_content(doc, content):
     """Add content in paragraph format"""
-    paragraphs = content.split('\n\n')
-    for paragraph in paragraphs:
-        if paragraph.strip():
-            doc.add_paragraph(paragraph.strip())
+    _add_formatted_content_to_docx(doc, content)
+
+def _add_formatted_content_to_docx(doc, content):
+    """Add formatted content to Word document, parsing Markdown formatting"""
+    lines = content.split('\n')
+    
+    for line in lines:
+        line = line.strip()
+        if not line:
+            doc.add_paragraph("")
+            continue
+            
+        # Check if it's a heading (starts with #)
+        if line.startswith('# '):
+            doc.add_heading(line[2:], level=1)
+        elif line.startswith('## '):
+            doc.add_heading(line[3:], level=2)
+        elif line.startswith('### '):
+            doc.add_heading(line[4:], level=3)
+        elif line.startswith('#### '):
+            doc.add_heading(line[5:], level=4)
+        # Check if it's a bullet point
+        elif line.startswith('- ') or line.startswith('* ') or line.startswith('• '):
+            doc.add_paragraph(line[2:], style='List Bullet')
+        # Check if it's a numbered list
+        elif line[0].isdigit() and line[1:3] in ['. ', ') ']:
+            doc.add_paragraph(line[3:], style='List Number')
+        else:
+            doc.add_paragraph(line)
