@@ -1,0 +1,7 @@
+# Simplified Teacher Document Generator Requirements
+streamlit
+openai
+requests
+python-docx
+python-pptx
+python-dotenv

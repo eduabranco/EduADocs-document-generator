@@ -24,25 +24,27 @@ def main():
         st.header("🤖 AI Model Selection")
         selected_llm = llm_selector.display_llm_selector()
         
+        
+    
+    # Main content area
+    col1, col2 = st.columns([2, 1])
+
+    
+    with col1:
         st.header("📋 Document Settings")
+        subject = st.text_input("Subject", placeholder="e.g., Mathematics, History, Science")
+        grade_level = st.selectbox(
+            "Grade Level",
+            ["Elementary (K-5)", "Middle School (6-8)", "High School (9-12)", "College/University", "Not specified"],
+            key="grade_level"
+        )
+        
+        st.header("📝 Content Description")
         doc_type = st.selectbox(
             "Document Type",
             ["Exercise List", "PowerPoint Presentation", "Summary"],
             key="doc_type"
         )
-        
-        subject = st.text_input("Subject", placeholder="e.g., Mathematics, History, Science")
-        grade_level = st.selectbox(
-            "Grade Level",
-            ["Elementary (K-5)", "Middle School (6-8)", "High School (9-12)", "College/University"],
-            key="grade_level"
-        )
-    
-    # Main content area
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        st.header("📝 Content Description")
         topic = st.text_area(
             "Describe the topic or provide content details:",
             height=200,

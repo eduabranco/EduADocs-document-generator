@@ -1,0 +1,23 @@
+# Teacher Document Generator - Streamlined Requirements
+# Core dependencies for the modular version
+
+# Web framework
+streamlit
+
+# AI/LLM providers
+openai
+requests
+
+# Document generation
+python-docx
+python-pptx
+
+# Optional: for local models
+ollama
+
+# Optional: for Hugging Face models
+transformers
+torch
+
+# Utilities
+python-dotenv
