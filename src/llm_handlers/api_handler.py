@@ -30,8 +30,6 @@ def _get_openai_response(prompt, config):
     data = {
         "model": config["model"],
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": config["temperature"],
-        "max_tokens": 4000
     }
     
     try:
