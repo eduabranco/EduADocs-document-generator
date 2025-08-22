@@ -67,6 +67,20 @@ streamlit run src/app.py
 
 Open your web browser and navigate to `http://localhost:8501` to access the application.
 
+## Documentation
+
+Additional technical documentation and implementation notes can be found in the [`docs/`](./docs/) directory:
+
+- **[PowerPoint Generator Fix](./docs/POWERPOINT_FIX_SUMMARY.md)** - Details about PowerPoint generation improvements
+- **[Ollama Cleanup Fix](./docs/OLLAMA_CLEANUP_FIX.md)** - Implementation of thinking tags cleanup
+- **[All Documentation Index](./docs/README.md)** - Complete documentation index
+
+## Project Variants
+
+This project has multiple variants available:
+- **[Simplified Version](./simplified/)** - Minimal implementation with basic features
+- **[Streamlined Version](./streamlined/)** - Optimized version with enhanced performance
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
