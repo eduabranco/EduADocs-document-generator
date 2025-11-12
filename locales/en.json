@@ -1,0 +1,163 @@
+{
+	"page": {
+		"title": "EduADocs - Document Generator",
+		"icon": "📚",
+		"header": "📚 EduADocs - Document Generator",
+		"description": "Generate exercise lists, PowerPoint slides, and summaries for your classes"
+	},
+
+	"sidebar": {
+		"ai_model_selection_header": "🤖 AI Model Selection",
+		"ai_model_type_label": "AI Model Type",
+		"ai_model_type_options": ["OpenAI API", "Ollama (Local)", "Hugging Face"]
+	},
+
+	"document_settings": {
+		"header": "📋 Document Settings",
+		"subject_label": "Subject",
+		"subject_placeholder": "e.g., Mathematics, History, Science",
+		"grade_level_label": "Grade Level",
+		"grade_level_options": [
+			"Elementary (K-5)",
+			"Middle School (6-8)",
+			"High School (9-12)",
+			"College/University",
+			"Not specified"
+		]
+	},
+
+	"content_description": {
+		"header": "📝 Content Description",
+		"document_type_label": "Document Type",
+		"document_type_options": ["Exercise List", "PowerPoint Presentation", "Summary"],
+		"topic_label": "Describe the topic or provide content details:",
+		"topic_placeholder": "Enter the specific topic, learning objectives, or content you want to include..."
+	},
+
+	"exercise_list": {
+		"num_questions_label": "Number of Questions",
+		"difficulty_label": "Difficulty Level",
+		"difficulty_options": ["Easy", "Medium", "Hard", "Mixed"],
+		"question_types_label": "Question Types",
+		"question_types_options": ["Multiple Choice", "True/False", "Short Answer", "Essay", "Problem Solving"],
+		"question_types_default": ["Multiple Choice", "Short Answer"]
+	},
+
+	"powerpoint": {
+		"num_slides_label": "Number of Slides",
+		"include_images_label": "Include image placeholders",
+		"presentation_style_label": "Presentation Style",
+		"presentation_style_options": ["Educational", "Interactive", "Formal", "Creative"]
+	},
+
+	"summary": {
+		"summary_length_label": "Summary Length",
+		"summary_length_options": ["Brief (1-2 pages)", "Detailed (3-5 pages)", "Comprehensive (5+ pages)"],
+		"include_examples_label": "Include examples",
+		"format_style_label": "Format Style",
+		"format_style_options": ["Bullet Points", "Paragraphs", "Outline", "Q&A Format"]
+	},
+
+	"generation": {
+		"options_header": "🎯 Generation Options",
+		"generate_button": "🚀 Generate Document",
+		"spinner_message": "Generating your document...",
+		"success_message": "Document generated successfully!",
+		"document_preview_header": "📄 Document Preview",
+		"view_generated_content": "View Generated Content",
+		"download_options_header": "💾 Download Options",
+		"download_word_label": "📄 Download Word Document",
+		"download_ppt_label": "📊 Download PowerPoint",
+		"error_generating_template": "Error generating document: {error}",
+		"exception_template": "An error occurred: {error}",
+		"validation_warning_prefix": "Warning: "
+	},
+
+	"help": {
+		"title": "❓ Help & Tips",
+		"getting_started_steps": [
+			"Select your preferred AI model",
+			"Choose document type and settings",
+			"Describe your topic in detail",
+			"Click Generate Document"
+		],
+		"ollama_for_users": [
+			"Make sure Ollama is running: `ollama serve`",
+			"Pull a model first: `ollama pull llama2`",
+			"Use smaller models for faster generation"
+		],
+		"tips_for_better_results": [
+			"Be specific about learning objectives",
+			"Include context about student level",
+			"Mention any specific requirements",
+			"Use clear, descriptive language"
+		]
+	},
+
+	"llm": {
+		"openai": {
+			"header": "OpenAI Configuration",
+			"api_key_label": "OpenAI API Key",
+			"api_key_help": "Enter your OpenAI API key",
+			"api_key_configured": "✅ API Key configured",
+			"model_label": "Model",
+			"model_options": ["gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", "gpt-4o", "gpt-4o-mini"],
+			"temperature_label": "Temperature (Creativity)",
+			"temperature_help": "Higher values make output more creative but less focused"
+		},
+
+		"ollama": {
+			"header": "Ollama Configuration",
+			"host_label": "Ollama Host",
+			"host_help": "Ollama server URL",
+			"connected_template": "✅ Connected to Ollama at {host}",
+			"cannot_connect_template": "❌ Cannot connect to Ollama at {host}",
+			"fix_steps": [
+				"Make sure Ollama is installed",
+				"Start Ollama: `ollama serve`",
+				"Pull a model: `ollama pull llama2`",
+				"Refresh this page"
+			],
+			"model_name_label": "Model Name",
+			"model_name_help": "Enter the name of the Ollama model to use",
+			"no_models_info": "No models found. Make sure you have pulled at least one model.",
+			"warning_could_not_fetch": "Could not fetch models from Ollama. Make sure Ollama is running.",
+			"temperature_label": "Temperature (Creativity)"
+		},
+
+		"huggingface": {
+			"header": "Hugging Face Configuration",
+			"api_key_label": "Hugging Face API Key (Optional)",
+			"api_key_help": "For private models or higher rate limits",
+			"model_label": "Model",
+			"model_options": [
+				"microsoft/DialoGPT-large",
+				"facebook/blenderbot-400M-distill",
+				"google/flan-t5-large",
+				"meta-llama/Llama-2-7b-chat-hf"
+			],
+			"run_locally_label": "Run locally (requires model download)",
+			"run_locally_help": "Download and run model locally instead of using API",
+			"temperature_label": "Temperature (Creativity)"
+		}
+	},
+
+	"ui_messages": {
+		"error_prefix": "❌ ",
+		"success_prefix": "✅ ",
+		"info_prefix": "ℹ️ ",
+		"warning_prefix": "⚠️ "
+	},
+
+	"validation": {
+		"subject_required": "Subject is required",
+		"topic_required": "Topic description is required",
+		"ai_config_required": "AI model configuration is required",
+		"openai_api_key_required": "OpenAI API key is required",
+		"ollama_host_model_required": "Ollama host and model are required",
+		"ollama_not_connected": "Ollama is not connected. Please start Ollama and refresh the page",
+		"huggingface_model_required": "Hugging Face model is required",
+		"valid": "Valid"
+	}
+
+}

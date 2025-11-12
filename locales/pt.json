@@ -1,0 +1,163 @@
+{
+	"page": {
+		"title": "EduADocs - Gerador de Documentos",
+		"icon": "📚",
+		"header": "📚 EduADocs - Gerador de Documentos",
+		"description": "Gere listas de exercícios, slides de PowerPoint e resumos para suas aulas"
+	},
+
+	"sidebar": {
+		"ai_model_selection_header": "🤖 Seleção do Modelo de IA",
+		"ai_model_type_label": "Tipo de Modelo de IA",
+		"ai_model_type_options": ["OpenAI API", "Ollama (Local)", "Hugging Face"]
+	},
+
+	"document_settings": {
+		"header": "📋 Configurações do Documento",
+		"subject_label": "Disciplina",
+		"subject_placeholder": "ex.: Matemática, História, Ciências",
+		"grade_level_label": "Nível Escolar",
+		"grade_level_options": [
+			"Fundamental (K-5)",
+			"Ensino Fundamental II (6-8)",
+			"Ensino Médio (9-12)",
+			"Faculdade/Universidade",
+			"Não especificado"
+		]
+	},
+
+	"content_description": {
+		"header": "📝 Descrição do Conteúdo",
+		"document_type_label": "Tipo de Documento",
+		"document_type_options": ["Lista de Exercícios", "Apresentação em PowerPoint", "Resumo"],
+		"topic_label": "Descreva o tópico ou forneça detalhes do conteúdo:",
+		"topic_placeholder": "Insira o tópico específico, objetivos de aprendizagem ou conteúdo que deseja incluir..."
+	},
+
+	"exercise_list": {
+		"num_questions_label": "Número de Questões",
+		"difficulty_label": "Nível de Dificuldade",
+		"difficulty_options": ["Fácil", "Médio", "Difícil", "Misto"],
+		"question_types_label": "Tipos de Questões",
+		"question_types_options": ["Múltipla Escolha", "Verdadeiro/Falso", "Resposta Curta", "Redação", "Resolução de Problemas"],
+		"question_types_default": ["Múltipla Escolha", "Resposta Curta"]
+	},
+
+	"powerpoint": {
+		"num_slides_label": "Número de Slides",
+		"include_images_label": "Incluir espaços para imagens",
+		"presentation_style_label": "Estilo da Apresentação",
+		"presentation_style_options": ["Educacional", "Interativa", "Formal", "Criativa"]
+	},
+
+	"summary": {
+		"summary_length_label": "Tamanho do Resumo",
+		"summary_length_options": ["Breve (1-2 páginas)", "Detalhado (3-5 páginas)", "Abrangente (5+ páginas)"],
+		"include_examples_label": "Incluir exemplos",
+		"format_style_label": "Estilo de Formatação",
+		"format_style_options": ["Tópicos", "Parágrafos", "Esboço", "Formato de Perguntas e Respostas"]
+	},
+
+	"generation": {
+		"options_header": "🎯 Opções de Geração",
+		"generate_button": "🚀 Gerar Documento",
+		"spinner_message": "Gerando seu documento...",
+		"success_message": "Documento gerado com sucesso!",
+		"document_preview_header": "📄 Visualização do Documento",
+		"view_generated_content": "Ver Conteúdo Gerado",
+		"download_options_header": "💾 Opções de Download",
+		"download_word_label": "📄 Baixar Documento Word",
+		"download_ppt_label": "📊 Baixar PowerPoint",
+		"error_generating_template": "Erro ao gerar o documento: {error}",
+		"exception_template": "Ocorreu um erro: {error}",
+		"validation_warning_prefix": "Aviso: "
+	},
+
+	"help": {
+		"title": "❓ Ajuda e Dicas",
+		"getting_started_steps": [
+			"Selecione seu modelo de IA preferido",
+			"Escolha o tipo de documento e as configurações",
+			"Descreva seu tópico em detalhes",
+			"Clique em Gerar Documento"
+		],
+		"ollama_for_users": [
+			"Certifique-se de que o Ollama esteja em execução: `ollama serve`",
+			"Puxe um modelo primeiro: `ollama pull llama2`",
+			"Use modelos menores para geração mais rápida"
+		],
+		"tips_for_better_results": [
+			"Seja específico sobre os objetivos de aprendizagem",
+			"Inclua contexto sobre o nível dos alunos",
+			"Mencione quaisquer requisitos específicos",
+			"Use linguagem clara e descritiva"
+		]
+	},
+
+	"llm": {
+		"openai": {
+			"header": "Configuração do OpenAI",
+			"api_key_label": "Chave da API OpenAI",
+			"api_key_help": "Insira sua chave de API do OpenAI",
+			"api_key_configured": "✅ Chave de API configurada",
+			"model_label": "Modelo",
+			"model_options": ["gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", "gpt-4o", "gpt-4o-mini"],
+			"temperature_label": "Temperatura (Criatividade)",
+			"temperature_help": "Valores maiores tornam a saída mais criativa, porém menos focada"
+		},
+
+		"ollama": {
+			"header": "Configuração do Ollama",
+			"host_label": "Host do Ollama",
+			"host_help": "URL do servidor Ollama",
+			"connected_template": "✅ Conectado ao Ollama em {host}",
+			"cannot_connect_template": "❌ Não foi possível conectar ao Ollama em {host}",
+			"fix_steps": [
+				"Verifique se o Ollama está instalado",
+				"Inicie o Ollama: `ollama serve`",
+				"Puxe um modelo: `ollama pull llama2`",
+				"Atualize esta página"
+			],
+			"model_name_label": "Nome do Modelo",
+			"model_name_help": "Insira o nome do modelo Ollama a ser usado",
+			"no_models_info": "Nenhum modelo encontrado. Certifique-se de ter puxado pelo menos um modelo.",
+			"warning_could_not_fetch": "Não foi possível obter modelos do Ollama. Certifique-se de que o Ollama está em execução.",
+			"temperature_label": "Temperatura (Criatividade)"
+		},
+
+		"huggingface": {
+			"header": "Configuração do Hugging Face",
+			"api_key_label": "Chave da API Hugging Face (Opcional)",
+			"api_key_help": "Para modelos privados ou limites maiores de taxa",
+			"model_label": "Modelo",
+			"model_options": [
+				"microsoft/DialoGPT-large",
+				"facebook/blenderbot-400M-distill",
+				"google/flan-t5-large",
+				"meta-llama/Llama-2-7b-chat-hf"
+			],
+			"run_locally_label": "Executar localmente (requer download do modelo)",
+			"run_locally_help": "Baixe e execute o modelo localmente em vez de usar a API",
+			"temperature_label": "Temperatura (Criatividade)"
+		}
+	},
+
+	"ui_messages": {
+		"error_prefix": "❌ ",
+		"success_prefix": "✅ ",
+		"info_prefix": "ℹ️ ",
+		"warning_prefix": "⚠️ "
+	},
+
+	"validation": {
+		"subject_required": "A disciplina é obrigatória",
+		"topic_required": "A descrição do tópico é obrigatória",
+		"ai_config_required": "A configuração do modelo de IA é obrigatória",
+		"openai_api_key_required": "A chave da API OpenAI é obrigatória",
+		"ollama_host_model_required": "Host e modelo do Ollama são obrigatórios",
+		"ollama_not_connected": "O Ollama não está conectado. Inicie o Ollama e atualize a página",
+		"huggingface_model_required": "O modelo do Hugging Face é obrigatório",
+		"valid": "Válido"
+	}
+
+}
