@@ -1,4 +1,4 @@
-# Teacher Document Generator
+# EduADocs - Document Generator
 
 This project is a Streamlit application designed to assist teachers in generating various educational documents, including exercise lists, PowerPoint slides, and summaries. The application allows users to select their preferred language model (LLM) from APIs, Ollama, or Hugging Face for document generation.
 
@@ -12,7 +12,7 @@ This project is a Streamlit application designed to assist teachers in generatin
 ## Project Structure
 
 ```
-teacher-doc-generator
+EduADocs-doc-generator
 ├── src
 │   ├── app.py
 │   ├── components
@@ -46,21 +46,22 @@ teacher-doc-generator
 ## Installation
 
 1. Clone the repository:
+
    ```
    git clone <repository-url>
-   cd teacher-doc-generator
+   cd EduADocs-doc-generator
    ```
-
 2. Install the required dependencies:
+
    ```
    pip install -r requirements.txt
    ```
-
 3. Set up your environment variables for API keys and other configurations as needed in `config/settings.py`.
 
 ## Usage
 
 To run the application, execute the following command:
+
 ```
 streamlit run src/app.py
 ```
@@ -78,6 +79,7 @@ Additional technical documentation and implementation notes can be found in the 
 ## Project Variants
 
 This project has multiple variants available:
+
 - **[Simplified Version](./simplified/)** - Minimal implementation with basic features
 - **[Streamlined Version](./streamlined/)** - Optimized version with enhanced performance
 

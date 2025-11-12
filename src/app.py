@@ -11,12 +11,12 @@ from utils.validation import validate_inputs
 
 def main():
     st.set_page_config(
-        page_title="Teacher Document Generator",
+        page_title="EduADocs - Document Generator",
         page_icon="📚",
         layout="wide"
     )
     
-    st.title("📚 Teacher Document Generator")
+    st.title("📚 EduADocs - Document Generator")
     st.markdown("Generate exercise lists, PowerPoint slides, and summaries for your classes")
     
     # Sidebar for LLM selection
