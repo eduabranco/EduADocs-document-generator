@@ -1,6 +1,8 @@
 import streamlit as st
 import os
 
+from components.llm_selector import _configure_google
+
 def display_llm_selector():
     """Display LLM selection interface and return configuration"""
     
@@ -18,6 +20,8 @@ def display_llm_selector():
         config.update(_configure_ollama())
     elif llm_type == "Hugging Face":
         config.update(_configure_huggingface())
+    elif llm_type == "Google GenAI":
+        config.update(_configure_google())
     
     return config
 

@@ -7,7 +7,7 @@ def display_llm_selector():
     
     llm_type = st.selectbox(
         "AI Model Type",
-        ["OpenAI API", "Ollama (Local)", "Hugging Face"],
+        ["OpenAI API", "Ollama (Local)", "Hugging Face", "Google GenAI"],
         key="llm_type"
     )
     
@@ -19,7 +19,9 @@ def display_llm_selector():
         config.update(_configure_ollama())
     elif llm_type == "Hugging Face":
         config.update(_configure_huggingface())
-    
+    elif llm_type == "Google GenAI":
+        config.update(_configure_google())
+
     return config
 
 def _configure_openai():
@@ -157,6 +159,38 @@ def _configure_huggingface():
         "provider": "huggingface"
     }
 
+def _configure_google():
+    """Configure Google GenAI settings"""
+    st.subheader("Google GenAI Configuration")
+    
+    # Try to get API key from secrets or environment
+    api_key = ""
+    try:
+        api_key = st.secrets.get("GOOGLE_API_KEY", "")
+    except:
+        api_key = os.getenv("GOOGLE_API_KEY", "")
+    
+    if not api_key:
+        api_key = st.text_input(
+            "Google API Key",
+            type="password",
+            help="Enter your Google API key"
+        )
+    else:
+        st.success("✅ API Key configured")
+    
+    model = st.selectbox(
+        "Model",
+        ["",  "gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite"],
+        index=0  # Default to gemini-2.5-pro (most capable)
+    )
+    
+    return {
+        "api_key": api_key,
+        "model": model,
+        "provider": "google"
+    }
+
 def _check_ollama_connection(host):
     """Check if Ollama is running and get available models"""
     try:
@@ -168,9 +202,10 @@ def _check_ollama_connection(host):
             return {"connected": True, "models": models}
         else:
             return {"connected": False, "error": f"HTTP {response.status_code}"}
-    except requests.exceptions.ConnectRefused:
+    except requests.exceptions.ConnectionError:
         return {"connected": False, "error": "Connection refused - Ollama not running"}
     except requests.exceptions.Timeout:
         return {"connected": False, "error": "Connection timeout"}
     except Exception as e:
         return {"connected": False, "error": str(e)}
+    
