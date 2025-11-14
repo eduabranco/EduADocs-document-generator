@@ -7,21 +7,22 @@ def display_llm_selector():
     
     llm_type = st.selectbox(
         "AI Model Type",
-        ["OpenAI API", "Ollama (Local)", "Hugging Face", "Google GenAI"],
-        key="llm_type"
+        ["Google GenAI", "Hugging Face", "Ollama (Local)", "OpenAI API"  ],
+        key="llm_type",
+        index=0 # Default to Google GenAI (most capable)
     )
     
     config = {"type": llm_type}
-    
-    if llm_type == "OpenAI API":
+
+    if llm_type == "Google GenAI":
+        config.update(_configure_google())
+    elif llm_type == "OpenAI API":
         config.update(_configure_openai())
     elif llm_type == "Ollama (Local)":
         config.update(_configure_ollama())
     elif llm_type == "Hugging Face":
         config.update(_configure_huggingface())
-    elif llm_type == "Google GenAI":
-        config.update(_configure_google())
-
+    
     return config
 
 def _configure_openai():
