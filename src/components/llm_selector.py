@@ -44,8 +44,8 @@ def _configure_openai():
     
     model = st.selectbox(
         "Model",
-        ["gpt-4o-mini", "gpt-5-nano", "gpt-4.1-nano", "gpt-4o-mini", "gpt-3.5-turbo"],
-        index=0  # Default to gpt-4o-mini (cheaper)
+        ["gpt-5-nano",  "gpt-4.1-nano", "gpt-4o-mini", "gpt-4o-mini-search-preview"],
+        index=0  # Default to gpt-5-nano (cheaper)
     )
     
     return {

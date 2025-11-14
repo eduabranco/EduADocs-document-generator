@@ -53,7 +53,7 @@ def main():
         
         # Additional parameters based on document type
         if doc_type == "Exercise List":
-            num_questions = st.slider("Number of Questions", 5, 50, 15)
+            num_questions = st.number_input("Number of Questions", min_value=1, value=10, step=1)
             difficulty = st.select_slider(
                 "Difficulty Level",
                 options=["Easy", "Medium", "Hard", "Mixed"],
@@ -66,7 +66,7 @@ def main():
             )
         
         elif doc_type == "PowerPoint Presentation":
-            num_slides = st.slider("Number of Slides", 5, 30, 12)
+            num_slides = st.number_input("Number of Slides", min_value=1, value=12, step=1)
             include_images = st.checkbox("Include image placeholders", value=True)
             presentation_style = st.selectbox(
                 "Presentation Style",
