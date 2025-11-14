@@ -1,3 +1,4 @@
+import os
 import requests
 import json
 import time
@@ -42,6 +43,8 @@ def get_llm_response(prompt, llm_config):
         return _get_ollama_response(prompt, llm_config)
     elif provider == "huggingface":
         return _get_huggingface_response(prompt, llm_config)
+    elif provider == "google":
+        return _get_google_response(prompt, llm_config)
     else:
         raise ValueError(f"Unsupported provider: {provider}")
 
@@ -225,3 +228,19 @@ def _get_huggingface_local_response(prompt, config):
         raise Exception("transformers library not installed for local Hugging Face models. Install with: pip install transformers torch")
     except Exception as e:
         raise Exception(f"Local Hugging Face model error: {str(e)}")
+    
+def _get_google_response(prompt, config):
+    """Get response from Google GenAI API"""
+    
+    if not config.get("api_key"):
+        raise ValueError("Google API key is required")
+
+    try:
+        import google.genai as genai
+        os.environ["GOOGLE_API_KEY"] = config["api_key"]
+        client=genai.Client()
+        response = client.models.generate_content(model=config["model"], contents=prompt)
+        
+        return response.text
+    except Exception as e:
+        raise Exception(f"Google GenAI API error: {str(e)}")

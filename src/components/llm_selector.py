@@ -46,8 +46,9 @@ def _configure_openai():
     
     model = st.selectbox(
         "Model",
-        ["gpt-5-nano",  "gpt-4.1-nano", "gpt-4o-mini", "gpt-4o-mini-search-preview"],
-        index=0  # Default to gpt-5-nano (cheaper)
+        ["gpt-5-nano", "gpt-4.1-nano", "gpt-4.1-mini", "gpt-4o-mini-search-preview"],
+        index=0,  # Default to gpt-5-nano (cheaper)
+        help="Choose the OpenAI model to use"
     )
     
     return {
@@ -181,7 +182,7 @@ def _configure_google():
     
     model = st.selectbox(
         "Model",
-        ["",  "gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite"],
+        ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite"],
         index=0  # Default to gemini-2.5-pro (most capable)
     )
     
