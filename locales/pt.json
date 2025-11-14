@@ -9,7 +9,7 @@
 	"sidebar": {
 		"ai_model_selection_header": "🤖 Seleção do Modelo de IA",
 		"ai_model_type_label": "Tipo de Modelo de IA",
-		"ai_model_type_options": ["OpenAI API", "Ollama (Local)", "Hugging Face"]
+		"ai_model_type_options": ["Google GenAI", "Hugging Face", "Ollama (Local)", "OpenAI API"]
 	},
 
 	"document_settings": {
@@ -95,13 +95,24 @@
 	},
 
 	"llm": {
+		"google": {
+			"header": "Configuração do Google GenAI",
+			"api_key_label": "Chave da API Google",
+			"api_key_help": "Insira sua chave de API do Google",
+			"api_key_configured": "✅ Chave de API configurada",
+			"model_label": "Modelo",
+			"model_options": ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite"],
+			"model_help": "Escolha o modelo do Google GenAI a usar"
+		},
+
 		"openai": {
 			"header": "Configuração do OpenAI",
 			"api_key_label": "Chave da API OpenAI",
 			"api_key_help": "Insira sua chave de API do OpenAI",
 			"api_key_configured": "✅ Chave de API configurada",
 			"model_label": "Modelo",
-			"model_options": ["gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", "gpt-4o", "gpt-4o-mini"],
+			"model_options": ["gpt-5-nano", "gpt-4.1-nano", "gpt-4.1-mini", "gpt-4o-mini-search-preview"],
+			"model_help": "Escolha o modelo do OpenAI a usar",
 			"temperature_label": "Temperatura (Criatividade)",
 			"temperature_help": "Valores maiores tornam a saída mais criativa, porém menos focada"
 		},
@@ -153,6 +164,7 @@
 		"subject_required": "A disciplina é obrigatória",
 		"topic_required": "A descrição do tópico é obrigatória",
 		"ai_config_required": "A configuração do modelo de IA é obrigatória",
+		"google_api_key_required": "A chave da API Google é obrigatória",
 		"openai_api_key_required": "A chave da API OpenAI é obrigatória",
 		"ollama_host_model_required": "Host e modelo do Ollama são obrigatórios",
 		"ollama_not_connected": "O Ollama não está conectado. Inicie o Ollama e atualize a página",

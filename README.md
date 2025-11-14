@@ -4,10 +4,11 @@ This project is a Streamlit application designed to assist teachers in generatin
 
 ## Features
 
+- **Multi-Language Support**: Choose between English and Portuguese (Português) 🌐
 - **Exercise List Generation**: Create customized exercise lists based on specified subjects and requirements.
 - **PowerPoint Slide Creation**: Generate PowerPoint presentations with content tailored to user specifications.
 - **Summary Generation**: Summarize provided content effectively for quick reference.
-- **LLM Selection**: Choose from multiple LLMs to suit different document generation needs.
+- **LLM Selection**: Choose from multiple LLMs (Google GenAI, OpenAI, Ollama, Hugging Face) to suit different document generation needs.
 
 ## Project Structure
 
@@ -18,6 +19,7 @@ EduADocs-doc-generator
 │   ├── components
 │   │   ├── document_generator.py
 │   │   ├── llm_selector.py
+│   │   ├── language_selector.py
 │   │   └── ui_components.py
 │   ├── generators
 │   │   ├── exercise_generator.py
@@ -28,20 +30,37 @@ EduADocs-doc-generator
 │   │   ├── ollama_handler.py
 │   │   └── huggingface_handler.py
 │   └── utils
+│       ├── language_manager.py
 │       ├── file_utils.py
 │       └── validation.py
-├── config
-│   └── settings.py
-├── templates
-│   ├── exercise_template.py
-│   ├── powerpoint_template.py
-│   └── summary_template.py
+├── locales
+│   ├── en.json
+│   └── pt.json
 ├── requirements.txt
 ├── .streamlit
 │   └── config.toml
 ├── .gitignore
 └── README.md
 ```
+
+## 🌐 Language Support
+
+The application supports multiple languages for a global audience:
+
+- **English** (en) - Default language
+- **Português** (pt) - Brazilian Portuguese
+
+You can easily switch between languages using the language selector in the sidebar without refreshing the page.
+
+### Adding New Languages
+
+To add a new language:
+
+1. Create a new JSON file in the `locales/` directory (e.g., `locales/es.json`)
+2. Copy the structure from `locales/en.json` and translate all strings
+3. Update `src/utils/language_manager.py` to include the new language in `SUPPORTED_LANGUAGES`
+
+For detailed instructions, see [LANGUAGE_QUICKSTART.md](LANGUAGE_QUICKSTART.md)
 
 ## Installation
 
@@ -67,21 +86,6 @@ streamlit run src/app.py
 ```
 
 Open your web browser and navigate to `http://localhost:8501` to access the application.
-
-## Documentation
-
-Additional technical documentation and implementation notes can be found in the [`docs/`](./docs/) directory:
-
-- **[PowerPoint Generator Fix](./docs/POWERPOINT_FIX_SUMMARY.md)** - Details about PowerPoint generation improvements
-- **[Ollama Cleanup Fix](./docs/OLLAMA_CLEANUP_FIX.md)** - Implementation of thinking tags cleanup
-- **[All Documentation Index](./docs/README.md)** - Complete documentation index
-
-## Project Variants
-
-This project has multiple variants available:
-
-- **[Simplified Version](./simplified/)** - Minimal implementation with basic features
-- **[Streamlined Version](./streamlined/)** - Optimized version with enhanced performance
 
 ## Contributing
 
