@@ -12,7 +12,6 @@ This project is a Streamlit application designed to assist teachers in generatin
 
 ## Project Structure
 
-```
 EduADocs-doc-generator
 ├── src
 │   ├── app.py
@@ -20,18 +19,14 @@ EduADocs-doc-generator
 │   │   ├── document_generator.py
 │   │   ├── llm_selector.py
 │   │   ├── language_selector.py
-│   │   └── ui_components.py
 │   ├── generators
 │   │   ├── exercise_generator.py
 │   │   ├── powerpoint_generator.py
 │   │   └── summary_generator.py
 │   ├── llm_handlers
 │   │   ├── api_handler.py
-│   │   ├── ollama_handler.py
-│   │   └── huggingface_handler.py
 │   └── utils
 │       ├── language_manager.py
-│       ├── file_utils.py
 │       └── validation.py
 ├── locales
 │   ├── en.json
@@ -41,7 +36,6 @@ EduADocs-doc-generator
 │   └── config.toml
 ├── .gitignore
 └── README.md
-```
 
 ## 🌐 Language Support
 
